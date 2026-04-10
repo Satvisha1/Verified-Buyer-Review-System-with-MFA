@@ -1,0 +1,130 @@
+.home-page {
+  min-height: calc(100vh - 80px);
+  background: #f5f5f7;
+  padding: 32px 20px 48px;
+}
+
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.home-welcome {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.home-welcome h1 {
+  margin-bottom: 12px;
+  font-size: 38px;
+  color: #1f2937;
+}
+
+.home-welcome p {
+  max-width: 720px;
+  margin: 0 auto;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.home-featured-products {
+  margin-bottom: 40px;
+}
+
+.home-featured-products h2,
+.home-place-order h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1f2937;
+}
+
+.home-products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.home-product-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  padding: 16px;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+}
+
+.home-product-image,
+.home-no-image {
+  width: 100%;
+  height: 220px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.home-product-image {
+  object-fit: cover;
+}
+
+.home-no-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  color: #6b7280;
+  border: 1px dashed #cbd5e1;
+}
+
+.home-product-card h3 {
+  margin-bottom: 6px;
+  font-size: 20px;
+}
+
+.home-product-card p {
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 12px;
+}
+
+.home-product-card button,
+.home-place-order button {
+  padding: 10px 18px;
+  background-color: #6a2c70;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  font-weight: 600;
+}
+
+.home-product-card button:hover,
+.home-place-order button:hover {
+  background-color: #57245d;
+  transform: translateY(-1px);
+}
+
+.home-place-order {
+  text-align: center;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+}
+
+.home-place-order p {
+  color: #6b7280;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 1024px) {
+  .home-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .home-products-grid {
+    grid-template-columns: 1fr;
+  }
+}

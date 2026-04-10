@@ -1,0 +1,57 @@
+.admin-logs-page {
+  padding: 24px 20px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-logs-page h2 {
+  margin-bottom: 16px;
+  color: #1f2937;
+}
+
+.page-error {
+  color: #b00020;
+  font-weight: 600;
+}
+
+.empty-message {
+  color: #6b7280;
+}
+
+.logs-table-wrapper {
+  overflow-x: auto;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.logs-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.logs-table th,
+.logs-table td {
+  border-bottom: 1px solid #eef2f7;
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.logs-table th {
+  background: #f9fafb;
+  font-weight: 700;
+  color: #374151;
+}
+
+.mono {
+  font-family: monospace;
+  word-break: break-all;
+}
+
+@media (max-width: 768px) {
+  .logs-table {
+    font-size: 13px;
+  }
+}

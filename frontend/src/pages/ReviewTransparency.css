@@ -1,0 +1,70 @@
+.review-transparency-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+}
+
+.review-transparency-page h2 {
+  margin: 14px 0 18px;
+  color: #1f2937;
+}
+
+.back-btn {
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.back-btn:hover {
+  background: #f3f4f6;
+}
+
+.page-error {
+  color: #b00020;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+.transparency-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 18px;
+  margin-top: 16px;
+  line-height: 1.7;
+  word-break: break-word;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.transparency-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #1f2937;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  word-break: break-all;
+}
+
+.verified-text {
+  color: #1b5e20;
+  font-weight: 700;
+}
+
+.failed-text {
+  color: #b00020;
+  font-weight: 700;
+}
+
+.transparency-card a {
+  color: #0b57d0;
+  text-decoration: none;
+}
+
+.transparency-card a:hover {
+  text-decoration: underline;
+}

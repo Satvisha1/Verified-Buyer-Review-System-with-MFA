@@ -1,0 +1,174 @@
+.my-reviews-page {
+  padding: 24px 20px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.my-reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.my-reviews-page h2 {
+  margin-bottom: 8px;
+  color: #1f2937;
+}
+
+.my-reviews-subtitle {
+  margin: 0;
+  color: #6b7280;
+}
+
+.rewards-summary-card {
+  min-width: 220px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+}
+
+.rewards-summary-label {
+  display: block;
+  color: #6b7280;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.rewards-summary-value {
+  display: block;
+  font-size: 28px;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.rewards-summary-note {
+  margin: 0;
+  color: #4b5563;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.page-error {
+  color: #b00020;
+  font-weight: 600;
+}
+
+.empty-message {
+  color: #6b7280;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.review-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  word-break: break-word;
+}
+
+.review-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.review-card-top h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #1f2937;
+}
+
+.review-status {
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.review-status.verified {
+  background: #e8f5e9;
+  color: #1b5e20;
+}
+
+.review-status.pending {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.reward-earned-chip {
+  display: inline-block;
+  margin: 12px 0;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #ede9fe;
+  color: #5b21b6;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.proof-box {
+  margin-top: 14px;
+  padding: 12px;
+  border: 1px solid #d9e6d9;
+  background: #f7fbf7;
+  border-radius: 10px;
+  line-height: 1.6;
+}
+
+.proof-title {
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #1f5f2c;
+}
+
+.proof-box a {
+  color: #0b57d0;
+  text-decoration: none;
+}
+
+.proof-box a:hover {
+  text-decoration: underline;
+}
+
+.transparency-btn {
+  padding: 10px 14px;
+  border: none;
+  background: #6a2c70;
+  color: #ffffff;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.transparency-btn:hover {
+  background: #57245d;
+  transform: translateY(-1px);
+}
+
+.transparency-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 768px) {
+  .review-card-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

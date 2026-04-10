@@ -1,0 +1,114 @@
+.login-container,
+.signup-container,
+.mfa-container {
+  width: 100%;
+  max-width: 430px;
+  margin: 50px auto;
+  padding: 28px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.login-form,
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.login-form label,
+.signup-form label {
+  text-align: left;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.login-form input,
+.signup-form input,
+.mfa-container input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #cfd6df;
+  background: #eef2f7;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.login-form input:focus,
+.signup-form input:focus,
+.mfa-container input:focus {
+  border-color: #6a2c70;
+  background: #ffffff;
+}
+
+.login-form button,
+.signup-form button,
+.mfa-container button {
+  width: 100%;
+  padding: 12px 15px;
+  background-color: #6a2c70;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.login-form button:hover,
+.signup-form button:hover,
+.mfa-container button:hover {
+  background-color: #57245d;
+  transform: translateY(-1px);
+}
+
+.login-form button:disabled,
+.signup-form button:disabled,
+.mfa-container button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.login-container h2,
+.signup-container h2,
+.mfa-container h2 {
+  color: #1f2937;
+  margin-bottom: 18px;
+}
+
+.login-container p,
+.signup-container p,
+.mfa-container p {
+  margin-top: 16px;
+  font-size: 15px;
+  color: #6b7280;
+}
+
+.login-container a,
+.signup-container a,
+.mfa-container a {
+  color: #6a2c70;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.login-container a:hover,
+.signup-container a:hover,
+.mfa-container a:hover {
+  text-decoration: underline;
+}
+
+.auth-error {
+  margin: 0;
+  color: #991b1b;
+  font-size: 14px;
+  font-weight: 600;
+}
