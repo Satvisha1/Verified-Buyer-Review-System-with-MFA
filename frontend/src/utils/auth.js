@@ -1,8 +1,6 @@
 export const getToken = () => {
   return (
     localStorage.getItem("token") ||
-    localStorage.getItem("authToken") ||
-    localStorage.getItem("jwt") ||
     ""
   );
 };
@@ -10,9 +8,7 @@ export const getToken = () => {
 export const getStoredUser = () => {
   try {
     const raw =
-      localStorage.getItem("user") ||
-      localStorage.getItem("currentUser") ||
-      localStorage.getItem("authUser");
+      localStorage.getItem("user");
 
     return raw ? JSON.parse(raw) : null;
   } catch (error) {
@@ -32,12 +28,8 @@ export const setAuthData = ({ token, user }) => {
 
 export const clearAuthData = () => {
   localStorage.removeItem("token");
-  localStorage.removeItem("authToken");
-  localStorage.removeItem("jwt");
 
   localStorage.removeItem("user");
-  localStorage.removeItem("currentUser");
-  localStorage.removeItem("authUser");
 };
 
 export const isSubAdmin = () => {

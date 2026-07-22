@@ -103,15 +103,20 @@ exports.signupAdmin = async (req, res) => {
       return res.status(400).json({ message: "Admin already exists" });
     }
 
+    const existingAdmin = await User.findOne({ role: "admin" });
+
     const admin = await User.create({
       name: name.trim(),
       email,
       password,
       role: "admin",
+      isActive: existingAdmin ? false : true,
     });
 
     return res.status(201).json({
-      message: "Admin registered successfully",
+      message: existingAdmin
+        ? "Admin signup request submitted. Approval required from existing admin."
+        : "First admin registered successfully",
       user: {
         id: admin._id.toString(),
         name: admin.name,
@@ -166,7 +171,10 @@ const loginByRole = async (req, res, expectedRole, roleLabel) => {
 
     if (user.isActive === false) {
       return res.status(403).json({
-        message: "Your account has been deactivated by Admin",
+        message:
+          user.role === "admin"
+            ? "Admin approval required before login"
+            : "Your account has been deactivated by Admin",
       });
     }
 

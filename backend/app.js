@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
+const rateLimit = require("express-rate-limit");
 
 const authRoutes = require("./routes/auth");
 const orderRoutes = require("./routes/orders");
@@ -15,6 +16,17 @@ const subAdminRoutes = require("./routes/subAdmin");
 
 const app = express();
 
+// Rate limiter for login, signup and OTP-related endpoints
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 20,
+  message: {
+    message: "Too many login or OTP attempts. Please try again later.",
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 // Allow frontend to access backend
 app.use(
   cors({
@@ -22,17 +34,17 @@ app.use(
   })
 );
 
-// Frontend bata send JSON file read
+// Read JSON request body from frontend
 app.use(express.json());
 
-// static file serving for uploaded product images
+// Static file serving for uploaded product images
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/reviews", reviewRoutes);
-app.use("/api/mfa", mfaRoutes);
+app.use("/api/mfa", authLimiter, mfaRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/blockchain", blockchainRoutes);
 app.use("/api/products", productRoutes);

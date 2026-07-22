@@ -39,6 +39,10 @@ function SubAdminLogin() {
           },
         });
       } else {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        localStorage.setItem("sub-admin", JSON.stringify(res.data.user));
+
         alert("Login successful");
         navigate("/sub-admin-dashboard");
       }
@@ -61,6 +65,7 @@ function SubAdminLogin() {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          disabled={isSubmitting}
           required
         />
 
@@ -69,6 +74,7 @@ function SubAdminLogin() {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          disabled={isSubmitting}
           required
         />
 

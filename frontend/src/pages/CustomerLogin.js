@@ -12,31 +12,37 @@ function CustomerLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isSubmitting) return;
+
+    if (isSubmitting || submittingRef.current) return;
+
     submittingRef.current = true;
     setIsSubmitting(true);
-    console.log("Login attempt:", { email, password });
 
     try {
       const res = await axios.post("http://localhost:5000/api/auth/login/customer", {
-        email,
-        password,
+        email: email.trim(),
+        password: password.trim(),
         role: "customer",
       });
 
-      console.log("Login response:", res.data);
-
       if (res.data.message && res.data.message.includes("MFA")) {
         await axios.post("http://localhost:5000/api/mfa/request", {
-          email: email,
+          email: email.trim(),
         });
 
         navigate("/mfa", {
           state: {
-            email: email,
+            email: email.trim(),
             role: "customer",
           },
         });
+      } else {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        localStorage.setItem("customer", JSON.stringify(res.data.user));
+
+        alert("Login successful");
+        navigate("/");
       }
     } catch (err) {
       console.error("Login error:", err.response?.data || err.message);
@@ -50,12 +56,14 @@ function CustomerLogin() {
   return (
     <div className="login-container">
       <h2>Customer Login</h2>
+
       <form onSubmit={handleSubmit} className="login-form">
         <label>Email:</label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          disabled={isSubmitting}
           required
         />
 
@@ -64,6 +72,7 @@ function CustomerLogin() {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          disabled={isSubmitting}
           required
         />
 

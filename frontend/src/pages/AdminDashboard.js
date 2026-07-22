@@ -12,6 +12,7 @@ function AdminDashboard() {
 
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState("");
+  const [processingOrderId, setProcessingOrderId] = useState(null);
 
   const fetchOrders = useCallback(async () => {
     try {
@@ -44,6 +45,10 @@ function AdminDashboard() {
   }, [token, user, navigate, fetchOrders]);
 
   const completePayment = async (id) => {
+    if (processingOrderId === id) return;
+
+    setProcessingOrderId(id);
+
     try {
       const res = await fetch(`${API}/api/admin/complete-payment/${id}`, {
         method: "POST",
@@ -63,10 +68,16 @@ function AdminDashboard() {
       );
     } catch (err) {
       alert(err.message || "Failed to mark completed");
+    } finally {
+      setProcessingOrderId(null);
     }
   };
 
   const verifyPayment = async (id) => {
+    if (processingOrderId === id) return;
+
+    setProcessingOrderId(id);
+
     try {
       const res = await fetch(`${API}/api/admin/verify-payment/${id}`, {
         method: "POST",
@@ -90,10 +101,16 @@ function AdminDashboard() {
       );
     } catch (err) {
       alert(err.message || "Failed to verify payment");
+    } finally {
+      setProcessingOrderId(null);
     }
   };
 
   const markDelivered = async (id) => {
+    if (processingOrderId === id) return;
+
+    setProcessingOrderId(id);
+
     try {
       const res = await fetch(`${API}/api/orders/update-delivery`, {
         method: "PUT",
@@ -119,6 +136,8 @@ function AdminDashboard() {
       );
     } catch (err) {
       alert(err.message || "Failed to mark delivered");
+    } finally {
+      setProcessingOrderId(null);
     }
   };
 
@@ -194,8 +213,9 @@ function AdminDashboard() {
                   <button
                     className="admin-dashboard-button"
                     onClick={() => completePayment(o._id)}
+                    disabled={processingOrderId === o._id}
                   >
-                    Complete
+                    {processingOrderId === o._id ? "Processing..." : "Complete"}
                   </button>
                 )}
 
@@ -203,8 +223,9 @@ function AdminDashboard() {
                   <button
                     className="admin-dashboard-button"
                     onClick={() => verifyPayment(o._id)}
+                    disabled={processingOrderId === o._id}
                   >
-                    Verify
+                    {processingOrderId === o._id ? "Processing..." : "Verify"}
                   </button>
                 )}
 
@@ -215,8 +236,11 @@ function AdminDashboard() {
                     <button
                       className="admin-dashboard-button"
                       onClick={() => markDelivered(o._id)}
+                      disabled={processingOrderId === o._id}
                     >
-                      Mark Delivered
+                      {processingOrderId === o._id
+                        ? "Processing..."
+                        : "Mark Delivered"}
                     </button>
                   ))}
               </td>

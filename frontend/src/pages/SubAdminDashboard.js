@@ -26,6 +26,8 @@ function SubAdminDashboard() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [processingOrderId, setProcessingOrderId] = useState(null);
+  const [processingProductId, setProcessingProductId] = useState(null);
+  const [creatingRequest, setCreatingRequest] = useState(false);
 
   const [createForm, setCreateForm] = useState({
     name: "",
@@ -150,6 +152,9 @@ function SubAdminDashboard() {
   const submitCreateRequest = async (e) => {
     e.preventDefault();
 
+    if (creatingRequest) return;
+    setCreatingRequest(true);
+
     try {
       setMessage("");
 
@@ -191,6 +196,8 @@ function SubAdminDashboard() {
       changeTab("requests");
     } catch (err) {
       setMessage(err.message || "Failed to submit create request");
+    } finally {
+      setCreatingRequest(false);
     }
   };
 
@@ -221,6 +228,9 @@ function SubAdminDashboard() {
   };
 
   const submitUpdateRequest = async (productId) => {
+    if (processingProductId === productId) return;
+    setProcessingProductId(productId);
+
     try {
       const form = updateForms[productId];
       if (!form) return;
@@ -265,14 +275,22 @@ function SubAdminDashboard() {
       changeTab("requests");
     } catch (err) {
       setMessage(err.message || "Failed to submit update request");
+    } finally {
+      setProcessingProductId(null);
     }
   };
 
   const submitDeleteRequest = async (productId) => {
+    if (processingProductId === productId) return;
+    setProcessingProductId(productId);
+
     const ok = window.confirm(
       "Submit a delete request for this product? Admin approval is required."
     );
-    if (!ok) return;
+    if (!ok) {
+      setProcessingProductId(null);
+      return;
+    }
 
     try {
       setMessage("");
@@ -296,6 +314,8 @@ function SubAdminDashboard() {
       changeTab("requests");
     } catch (err) {
       setMessage(err.message || "Failed to submit delete request");
+    } finally {
+      setProcessingProductId(null);
     }
   };
 
@@ -454,7 +474,9 @@ function SubAdminDashboard() {
                     onChange={handleCreateChange}
                   />
 
-                  <button type="submit">Submit for Approval</button>
+                  <button type="submit" disabled={creatingRequest}>
+                    {creatingRequest ? "Submitting..." : "Submit for Approval"}
+                  </button>
                 </form>
               </div>
             )}
@@ -498,9 +520,12 @@ function SubAdminDashboard() {
                             <button
                               type="button"
                               className="danger"
+                              disabled={processingProductId === product._id}
                               onClick={() => submitDeleteRequest(product._id)}
                             >
-                              Request Delete
+                              {processingProductId === product._id
+                                ? "Submitting..."
+                                : "Request Delete"}
                             </button>
                           </div>
 
@@ -540,9 +565,12 @@ function SubAdminDashboard() {
                               />
                               <button
                                 type="button"
+                                disabled={processingProductId === product._id}
                                 onClick={() => submitUpdateRequest(product._id)}
                               >
-                                Submit Update Request
+                                {processingProductId === product._id
+                                  ? "Submitting..."
+                                  : "Submit Update Request"}
                               </button>
                             </div>
                           )}

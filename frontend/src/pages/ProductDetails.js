@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "./ProductDetails.css";
@@ -31,6 +31,8 @@ function ProductDetails() {
   const [comment, setComment] = useState("");
   const [msg, setMsg] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [ordering, setOrdering] = useState(false);
+  const orderingRef = useRef(false);
 
   const [blockchainScore, setBlockchainScore] = useState(null);
   const [scoreLoading, setScoreLoading] = useState(true);
@@ -139,6 +141,11 @@ function ProductDetails() {
       return;
     }
 
+    if (ordering || orderingRef.current) return;
+
+    orderingRef.current = true;
+    setOrdering(true);
+
     try {
       await axios.post(
         `${API}/api/orders/create`,
@@ -158,6 +165,9 @@ function ProductDetails() {
       alert("Order placed");
     } catch {
       alert("Order failed");
+    } finally {
+      orderingRef.current = false;
+      setOrdering(false);
     }
   };
 
@@ -249,8 +259,8 @@ function ProductDetails() {
           <p className="price">Rs {productData?.price}</p>
           <p className="desc">{productData?.desc}</p>
 
-          <button className="orderBtn" onClick={placeOrder}>
-            Order Now
+          <button className="orderBtn" onClick={placeOrder} disabled={ordering}>
+            {ordering ? "Ordering..." : "Order Now"}
           </button>
 
           <div className="ratingLine">
@@ -270,7 +280,6 @@ function ProductDetails() {
               <p className="score-error">{scoreError}</p>
             ) : (
               <div className="blockchain-score-grid minimal">
-                
                 <div className="score-metric">
                   <span className="score-label">Average</span>
                   <strong className="score-value">
@@ -287,7 +296,6 @@ function ProductDetails() {
                     {Number(blockchainScore?.reviewCount || 0)}
                   </strong>
                 </div>
-
               </div>
             )}
           </div>
